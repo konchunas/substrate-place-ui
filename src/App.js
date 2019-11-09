@@ -16,7 +16,8 @@ const App = () => {
   let chunks = [];
   for (let i = 0; i < CHUNKS_PER_SIDE; i++) {
     for (let j = 0; j < CHUNKS_PER_SIDE; j++) {
-        chunks.push(<Chunk x={i*8} y={j*8} />);
+        const key = `${i} ${j}`;
+        chunks.push(<Chunk key={key} x={i*8} y={j*8} side={CHUNK_SIDE} />);
     }
   }
 
