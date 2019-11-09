@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Stage, Container, AppConsumer, Graphics } from "@inlet/react-pixi";
+import Viewport from './components/Viewport'
+import Chunk from './components/Chunk'
+import "./App.css";
 
-function App() {
+const { useState, useMemo } = React;
+
+const CHUNKS_PER_SIDE = 8;
+const CHUNK_SIDE = 8;
+const FIELD_SIZE = CHUNKS_PER_SIDE * CHUNK_SIDE;
+
+// app
+const App = () => {
+
+  let chunks = [];
+  for (let i = 0; i < CHUNKS_PER_SIDE; i++) {
+    for (let j = 0; j < CHUNKS_PER_SIDE; j++) {
+        chunks.push(<Chunk x={i*8} y={j*8} />);
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Stage options={{ backgroundColor: 0xbbbbbb, resizeTo: window }}>
+        <Container sortableChildren={true}>
+            <AppConsumer>
+                {app =>
+                    <Viewport app={app} worldWidth={FIELD_SIZE} worldHeight={FIELD_SIZE}>
+                        {chunks}
+                    </Viewport>
+                }
+            </AppConsumer>
+        </Container>
+    </Stage>
   );
-}
+};
 
 export default App;
