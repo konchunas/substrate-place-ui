@@ -21,3 +21,9 @@ export function toCartesian(chunk, index) {
   return {x: x, y: y}
 }
 
+export function indexToCartesian(index) {
+  let x = index % CHUNK_SIDE
+  let y = Math.floor(index / CHUNK_SIDE)
+  return {x: x, y: y}
+}
+

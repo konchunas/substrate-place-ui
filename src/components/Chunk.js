@@ -3,6 +3,7 @@ import { Graphics, Container } from "@inlet/react-pixi";
 import Pixel from "./Pixel";
 import { utils } from "pixi.js";
 import { runtime } from "oo7-substrate"
+import { indexToCartesian } from "../utils"
 
 const { useState } = React;
 
@@ -12,11 +13,19 @@ const Chunk = props => {
     const htmlColor = utils.hex2string(color)
     props.onPixelSelected(x, y, htmlColor);
   };
-
+  
+  let convertToCartesianChunk = (array) => {
+    for (let i = 0; i < array.length; i++) {
+      const {x, y} = indexToCartesian(i);
+      const color = array[i].color
+      console.log(color.r)
+    }
+  }
   
 
   let runtimePixels = runtime.place.chunks(props.chunkNumber)
-  runtimePixels.then(console.log)
+  // runtimePixels.then((arg) => console.log(arg[0]))
+  runtimePixels.then(convertToCartesianChunk)
 
   let pixels = [];
   for (let i = 0; i < props.side; i++) {
