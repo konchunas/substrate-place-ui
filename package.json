@@ -4,6 +4,9 @@
   "private": true,
   "dependencies": {
     "@inlet/react-pixi": "^1.1.8",
+    "oo7": "^0.7.12",
+    "oo7-react": "^0.8.13",
+    "oo7-substrate": "^0.8.0",
     "pixi-viewport": "^4.3.3",
     "pixi.js": "^5.2.0",
     "react": "^16.11.0",
