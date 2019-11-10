@@ -21,17 +21,17 @@ import {
   nodeService,
   bytesToHex,
   hexToBytes,
-  AccountId
+  AccountId,
+  addCodecTransform
 } from "oo7-substrate";
 
 import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 
-const { createRef, useState } = React;
+import { CHUNKS_PER_SIDE, CHUNK_SIDE, FIELD_SIZE } from "./settings";
+import { fromCartesian } from "./utils";
 
-const CHUNKS_PER_SIDE = 8;
-const CHUNK_SIDE = 8;
-const FIELD_SIZE = CHUNKS_PER_SIDE * CHUNK_SIDE;
+const { createRef, useState } = React;
 
 export class App extends ReactiveComponent {
   constructor() {
@@ -56,31 +56,35 @@ export class App extends ReactiveComponent {
       chunks: []
     };
 
-    // addCodecTransform('Kitty<Hash,Balance>', {
-    //     id: 'Hash',
-    //     dna: 'Hash',
-    //     price: 'Balance',
-    //     gen: 'u64'
-    // });
+    addCodecTransform("Pixel<Balance>", {
+      price: "Balance",
+      color: "Color"
+    });
+    addCodecTransform("Color", {
+      r: "u8",
+      g: "u8",
+      b: "u8"
+    });
 
     const contextRef = createRef();
   }
 
-  setSelectedPixel = (pixel) => {
+  setSelectedPixel = pixel => {
     this.setState({
       selectedPixel: pixel
     });
-  }
+  };
 
   onPixelSelected = (x, y, color) => {
     this.setSelectedPixel({ x: x, y: y, color: color });
-  }
+  };
 
   readyRender() {
     let chunks = [];
     for (let i = 0; i < CHUNKS_PER_SIDE; i++) {
       for (let j = 0; j < CHUNKS_PER_SIDE; j++) {
         const key = `${i} ${j}`;
+        const { chunkNumber, _ } = fromCartesian(i, j);
         chunks.push(
           <Chunk
             key={key}
@@ -88,6 +92,7 @@ export class App extends ReactiveComponent {
             y={j * 8}
             side={CHUNK_SIDE}
             onPixelSelected={this.onPixelSelected}
+            chunkNumber={chunkNumber}
           />
         );
       }

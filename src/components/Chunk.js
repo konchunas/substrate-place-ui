@@ -2,8 +2,7 @@ import React from "react";
 import { Graphics, Container } from "@inlet/react-pixi";
 import Pixel from "./Pixel";
 import { utils } from "pixi.js";
-
-const SIDE = 8;
+import { runtime } from "oo7-substrate"
 
 const { useState } = React;
 
@@ -13,6 +12,11 @@ const Chunk = props => {
     const htmlColor = utils.hex2string(color)
     props.onPixelSelected(x, y, htmlColor);
   };
+
+  
+
+  let runtimePixels = runtime.place.chunks(props.chunkNumber)
+  runtimePixels.then(console.log)
 
   let pixels = [];
   for (let i = 0; i < props.side; i++) {
