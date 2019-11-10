@@ -6,12 +6,13 @@ const Pixel = props => {
     <Graphics
       {...props}
       interactive={true}
+      click={() => props.onClick(props.x, props.y, props.color)}
       draw={g => {
         if (props.color)
             g.beginFill(props.color);
         
-        g.lineStyle(0.015, 0x0)
-        g.drawRect(props.x, props.y, 1, 1);
+        g.lineStyle(0.016, 0x0)
+        g.drawRect(0, 0, 1, 1);
 
         if (props.color)
             g.endFill();
