@@ -11,7 +11,7 @@ const Pixel = props => {
         if (props.color)
             g.beginFill(props.color);
         
-        g.lineStyle(0.016, 0x0)
+        g.lineStyle(0.02, 0x0)
         g.drawRect(0, 0, 1, 1);
 
         if (props.color)

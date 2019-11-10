@@ -13,9 +13,8 @@ import {
   Grid,
 } from "semantic-ui-react";
 import "./App.css";
-import 'semantic-ui-css/semantic.min.css';
 
-const { createRef } = React;
+const { createRef, useState } = React;
 
 const CHUNKS_PER_SIDE = 8;
 const CHUNK_SIDE = 8;
@@ -24,17 +23,36 @@ const FIELD_SIZE = CHUNKS_PER_SIDE * CHUNK_SIDE;
 // app
 const App = () => {
   const contextRef = createRef();
+
+  let [selectedPixel, setSelectedPixel] = useState({});
+
+  let onPixelSelected = (x, y, color) => {
+    // selectedPixel.x = x
+    // selectedPixel.y = y
+    // selectedPixel.color = color
+    setSelectedPixel({ x: x, y: y, color: color });
+  };
+
   let chunks = [];
   for (let i = 0; i < CHUNKS_PER_SIDE; i++) {
     for (let j = 0; j < CHUNKS_PER_SIDE; j++) {
       const key = `${i} ${j}`;
-      chunks.push(<Chunk key={key} x={i * 8} y={j * 8} side={CHUNK_SIDE} />);
+      chunks.push(
+        <Chunk
+          key={key}
+          x={i * 8}
+          y={j * 8}
+          side={CHUNK_SIDE}
+          onPixelSelected={onPixelSelected}
+        />
+      );
     }
   }
 
   return (
     <Segment>
-      <Stage width={720} height={720} options={{ backgroundColor: 0xbbbbbb}}>
+      <Segment ref={contextRef}></Segment>
+      <Stage width={720} height={720} options={{ backgroundColor: 0xbbbbbb }}>
         <Container sortableChildren={true}>
           <AppConsumer>
             {app => (
@@ -50,7 +68,16 @@ const App = () => {
         </Container>
       </Stage>
       <Rail attached internal position="right">
-          <Segment>Right Rail Content</Segment>
+        <Segment>
+          <Header>Selected pixel</Header>
+          <div>
+            Color: <Label color={selectedPixel.color} />
+          </div>
+          <div>
+            Position: ({selectedPixel.x},{selectedPixel.y})
+          </div>
+          <div>Price: {selectedPixel.price}</div>
+        </Segment>
       </Rail>
     </Segment>
   );
