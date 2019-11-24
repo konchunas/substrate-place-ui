@@ -21,9 +21,18 @@ export function toCartesian(chunk, index) {
   return {x: x, y: y}
 }
 
+//TODO remove CHUNK_SIDE dependency
 export function indexToCartesian(index) {
   let x = index % CHUNK_SIDE
   let y = Math.floor(index / CHUNK_SIDE)
   return {x: x, y: y}
+}
+
+
+//TODO remove CHUNKS_PER_SIDE dependency
+export function cartesianToIndex(x,y) {
+  let localX = x % CHUNKS_PER_SIDE;
+  let localY = y % CHUNKS_PER_SIDE;
+  return localX + localY * CHUNKS_PER_SIDE;
 }
 

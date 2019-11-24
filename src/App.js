@@ -29,7 +29,7 @@ import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 
 import { CHUNKS_PER_SIDE, CHUNK_SIDE, FIELD_SIZE } from "./settings";
-import { fromCartesian } from "./utils";
+import { cartesianToIndex } from "./utils";
 
 const { createRef, useState } = React;
 
@@ -49,7 +49,7 @@ export class App extends ReactiveComponent {
 
     this.state = {
       selectedPixel: {
-        color: "white",
+        color: "purple",
         x: 0,
         y: 0
       },
@@ -84,7 +84,7 @@ export class App extends ReactiveComponent {
     for (let i = 0; i < CHUNKS_PER_SIDE; i++) {
       for (let j = 0; j < CHUNKS_PER_SIDE; j++) {
         const key = `${i} ${j}`;
-        const { chunkNumber, _ } = fromCartesian(i, j);
+        const chunkNumber = cartesianToIndex(i, j);
         chunks.push(
           <Chunk
             key={key}
