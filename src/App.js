@@ -3,6 +3,11 @@ import { Stage, Container, AppConsumer, Graphics } from "@inlet/react-pixi";
 import Viewport from "./components/Viewport";
 import Chunk from "./components/Chunk";
 import Heading from "./components/Heading";
+import { SignerBond } from './components/AccountIdBond';
+import WalletSegment from "./components/Wallet";
+import {Pretty} from "./components/Pretty";
+import TransactButton from "./components/TransactButton";
+
 import { Segment, Header, Rail, Label, Menu, Grid } from "semantic-ui-react";
 import { Bond, TransformBond, AddCodecTransform } from "oo7";
 import { ReactiveComponent, If, Rspan } from "oo7-react";
@@ -47,6 +52,8 @@ export class App extends ReactiveComponent {
     window.that = this;
     window.metadata = metadata;
 
+    this.account = new Bond
+
     this.state = {
       selectedPixel: {
         color: "purple",
@@ -76,6 +83,7 @@ export class App extends ReactiveComponent {
   };
 
   onPixelSelected = (x, y, color) => {
+    // this.calls.place.purchasePixel(this.account)
     this.setSelectedPixel({ x: x, y: y, color: color });
   };
 
@@ -127,9 +135,34 @@ export class App extends ReactiveComponent {
               {this.state.selectedPixel.y})
             </div>
             <div>Price: {this.state.selectedPixel.price}</div>
+            <BalanceBond bond={this.amount} />
+            <TransactButton
+                content="Purchase"
+                icon='send'
+                tx={{
+                    sender: runtime.indices.tryIndex(this.account),
+                    call: calls.place.purchasePixel(this.state.selectedPixel.x, this.state.selectedPixel.y),
+                    compact: false,
+                    longevity: true
+                }}
+            />
           </Segment>
+          <WalletSegment/>
         </Rail>
         <Heading></Heading>
+        <SignerBond bond={this.account}/>
+        <If condition={this.account.ready()} then={<span>
+            <Label>Balance
+                <Label.Detail>
+                  <Pretty value={runtime.balances.balance(this.account)} />
+                </Label.Detail>
+            </Label>
+            <Label>Nonce
+                <Label.Detail>
+                  <Pretty value={runtime.system.accountNonce(this.source)} />
+                </Label.Detail>
+            </Label>
+        </span>} />
       </Segment>
     );
   }
