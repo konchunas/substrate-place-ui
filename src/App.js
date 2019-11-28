@@ -6,7 +6,8 @@ import Heading from "./components/Heading";
 import { SignerBond } from './components/AccountIdBond';
 import WalletSegment from "./components/Wallet";
 import {Pretty} from "./components/Pretty";
-import TransactButton from "./components/TransactButton";
+import { TransactButton } from "./components/TransactButton";
+import { BalanceBond } from "./components/BalanceBond";
 
 import { Segment, Header, Rail, Label, Menu, Grid } from "semantic-ui-react";
 import { Bond, TransformBond, AddCodecTransform } from "oo7";
@@ -53,15 +54,26 @@ export class App extends ReactiveComponent {
     window.metadata = metadata;
 
     this.account = new Bond
+    this.amount = new Bond;
 
     this.state = {
       selectedPixel: {
-        color: "purple",
+        color: {
+          r: 25,
+          g: 255,
+          b: 129
+        },
         x: 0,
         y: 0
       },
       chunks: []
     };
+
+    this.color = {
+      r: 25,
+      g: 255,
+      b: 129
+    }
 
     addCodecTransform("Pixel<Balance>", {
       price: "Balance",
@@ -128,29 +140,33 @@ export class App extends ReactiveComponent {
           <Segment>
             <Header>Selected pixel</Header>
             <div>
-              Color: <Label color={this.state.selectedPixel.color || "black"} />
+              Color: <Label color={"black"} />
             </div>
             <div>
               Position: ({this.state.selectedPixel.x},
               {this.state.selectedPixel.y})
             </div>
-            <div>Price: {this.state.selectedPixel.price}</div>
-            <BalanceBond bond={this.amount} />
-            <TransactButton
+            <div>Price: {this.state.selectedPixel.price}
+              <BalanceBond bond={this.amount} />
+            </div>
+            <div>
+              Payer:
+              <SignerBond bond={this.account} />
+            </div>
+            <div>
+              <TransactButton
                 content="Purchase"
-                icon='send'
+                icon='warning'
                 tx={{
                     sender: runtime.indices.tryIndex(this.account),
-                    call: calls.place.purchasePixel(this.state.selectedPixel.x, this.state.selectedPixel.y),
-                    compact: false,
-                    longevity: true
+                    call: calls.place.purchasePixel(this.state.selectedPixel.x, this.state.selectedPixel.y, this.color, this.amount),
                 }}
-            />
+              />
+            </div>
           </Segment>
           <WalletSegment/>
         </Rail>
         <Heading></Heading>
-        <SignerBond bond={this.account}/>
         <If condition={this.account.ready()} then={<span>
             <Label>Balance
                 <Label.Detail>
@@ -159,7 +175,7 @@ export class App extends ReactiveComponent {
             </Label>
             <Label>Nonce
                 <Label.Detail>
-                  <Pretty value={runtime.system.accountNonce(this.source)} />
+                  {/* <Pretty value={runtime.system.accountNonce(this.source)} /> */}
                 </Label.Detail>
             </Label>
         </span>} />
