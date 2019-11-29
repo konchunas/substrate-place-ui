@@ -34,8 +34,8 @@ import {
 import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 
-import { CHUNKS_PER_SIDE, CHUNK_SIDE, FIELD_SIZE } from "./settings";
-import { cartesianToIndex } from "./utils";
+import { CHUNKS_PER_SIDE, PIXELS_PER_CHUNK, FIELD_SIZE } from "./settings";
+import { cartesianToIndex, CHUNK_COORDS } from "./utils";
 
 const { createRef, useState } = React;
 
@@ -104,13 +104,13 @@ export class App extends ReactiveComponent {
     for (let i = 0; i < CHUNKS_PER_SIDE; i++) {
       for (let j = 0; j < CHUNKS_PER_SIDE; j++) {
         const key = `${i} ${j}`;
-        const chunkNumber = cartesianToIndex(i, j);
+        const chunkNumber = cartesianToIndex(i, j, CHUNK_COORDS);
         chunks.push(
           <Chunk
             key={key}
             x={i * 8}
             y={j * 8}
-            side={CHUNK_SIDE}
+            side={PIXELS_PER_CHUNK}
             onPixelSelected={this.onPixelSelected}
             chunkNumber={chunkNumber}
           />

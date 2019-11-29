@@ -3,19 +3,22 @@ import { Container } from "@inlet/react-pixi";
 import Pixel from "./Pixel";
 import { utils } from "pixi.js";
 import { runtime } from "oo7-substrate"
-import { indexToCartesian } from "../utils"
-import { CHUNK_SIDE } from "../settings"
+import { indexToCartesian, cartesianToIndex, toCartesian, PIXEL_COORDS } from "../utils"
+import { PIXELS_PER_CHUNK } from "../settings"
 
 const Chunk = props => {
   let onClick = React.useCallback((x, y, color) => {
-    console.log(x, y, color);
+    let pixelIndex = cartesianToIndex(x, y, PIXEL_COORDS)
+    let chunkFirstPixel = toCartesian(props.chunkNumber, 0)
     const htmlColor = utils.hex2string(color)
-    props.onPixelSelected(x, y, htmlColor);
+    let globalX = x + chunkFirstPixel.x
+    let globalY = y + chunkFirstPixel.y
+    props.onPixelSelected(globalX, globalY, htmlColor)
   }, [props])
 
-  let [pixels, setPixels] = React.useState(() => createMatrix(CHUNK_SIDE))
+  let [pixels, setPixels] = React.useState(() => createMatrix(PIXELS_PER_CHUNK))
   let convertToCartesianChunk = (array) => {
-    let newPixels = createMatrix(CHUNK_SIDE)
+    let newPixels = createMatrix(PIXELS_PER_CHUNK)
     for (let i = 0; i < array.length; i++) {
       const {x, y} = indexToCartesian(i);
       const color = array[i].color
@@ -32,8 +35,8 @@ const Chunk = props => {
 
   let getPixelComponents = React.useMemo(() => {
     let pixelComponents = []
-    for (let i = 0; i < CHUNK_SIDE; i++) {
-      for (let j = 0; j < CHUNK_SIDE; j++) {
+    for (let i = 0; i < PIXELS_PER_CHUNK; i++) {
+      for (let j = 0; j < PIXELS_PER_CHUNK; j++) {
         pixelComponents.push(
             <Pixel key={`${i}${j}`} x={i} y={j} color={pixels[i][j]} onClick={onClick} />
         );
