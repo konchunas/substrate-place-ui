@@ -133,7 +133,7 @@ export class App extends ReactiveComponent {
           <Segment>
             <Header>Selected pixel</Header>
             <div>
-              Color: <Label color={"black"} />
+              Color: <Label style={{backgroundColor: this.state.selectedPixel.color}}/>
             </div>
             <div>
               Position: ({this.state.selectedPixel.x},
