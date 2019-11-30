@@ -9,6 +9,7 @@
     "oo7-substrate": "^0.8.0",
     "pixi-viewport": "^4.3.3",
     "pixi.js": "^5.2.0",
+    "polkadot-identicon": "^1.1.45",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-scripts": "3.2.0",

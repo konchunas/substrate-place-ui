@@ -5,11 +5,11 @@ import Chunk from "./components/Chunk";
 import Heading from "./components/Heading";
 import { SignerBond } from './components/AccountIdBond';
 import WalletSegment from "./components/Wallet";
+import PurchasePixelSegment from "./components/PurchasePixel"
 import {Pretty} from "./components/Pretty";
-import { TransactButton } from "./components/TransactButton";
-import { BalanceBond } from "./components/BalanceBond";
 
-import { Segment, Header, Rail, Label, Menu, Grid } from "semantic-ui-react";
+
+import { Segment, Header, Rail, Label } from "semantic-ui-react";
 import { Bond, TransformBond, AddCodecTransform } from "oo7";
 import { ReactiveComponent, If, Rspan } from "oo7-react";
 import {
@@ -69,12 +69,6 @@ export class App extends ReactiveComponent {
       chunks: []
     };
 
-    this.color = {
-      r: 25,
-      g: 255,
-      b: 129
-    }
-
     addCodecTransform("Pixel<Balance>", {
       price: "Balance",
       color: "Color"
@@ -120,7 +114,6 @@ export class App extends ReactiveComponent {
 
     return (
       <Segment>
-        <Segment></Segment>
         <Stage width={720} height={720} options={{ backgroundColor: 0xbbbbbb }}>
           <Container sortableChildren={true}>
             <AppConsumer>
@@ -146,24 +139,8 @@ export class App extends ReactiveComponent {
               Position: ({this.state.selectedPixel.x},
               {this.state.selectedPixel.y})
             </div>
-            <div>Price: {this.state.selectedPixel.price}
-              <BalanceBond bond={this.amount} />
-            </div>
-            <div>
-              Payer:
-              <SignerBond bond={this.account} />
-            </div>
-            <div>
-              <TransactButton
-                content="Purchase"
-                icon='warning'
-                tx={{
-                    sender: runtime.indices.tryIndex(this.account),
-                    call: calls.place.purchasePixel(this.state.selectedPixel.x, this.state.selectedPixel.y, this.color, this.amount),
-                }}
-              />
-            </div>
           </Segment>
+          <PurchasePixelSegment selectedPixel={this.state.selectedPixel}/>
           <WalletSegment/>
         </Rail>
         <Heading></Heading>

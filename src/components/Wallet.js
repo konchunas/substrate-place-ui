@@ -19,7 +19,7 @@ class WalletSegment extends React.Component {
     this.name = new Bond;
   }
   render() {
-    return <Segment style={{ margin: '1em' }}>
+    return <Segment>
       <Header as='h2'>
         <Icon name='key' />
         <Header.Content>
