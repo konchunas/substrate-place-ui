@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Bond } from "oo7";
-import { Segment, Header, Button, Input } from "semantic-ui-react";
+import { Segment, Header, Label, Input } from "semantic-ui-react";
 import { runtime, calls } from 'oo7-substrate';
 
 import { TransactButton } from ".//TransactButton";
@@ -37,12 +37,9 @@ class PurchasePixelSegment extends React.Component {
       </div>
       <div style={{ paddingBottom: '1em' }}>
         color <br />
-        <div class="ui label label">red</div>
-        <InputBond bond={this.r} placeholder='255' />
-        <div class="ui label label">green</div>
-        <InputBond bond={this.g} placeholder='255' />
-        <div class="ui label label">blue</div>
-        <InputBond bond={this.b} placeholder='255' />
+        <InputBond bond={this.r} placeholder='255' label={<Label style={{backgroundColor: "red"}}/> } />
+        <InputBond bond={this.g} placeholder='255' label={<Label style={{backgroundColor: "green"}}/> } />
+        <InputBond bond={this.b} placeholder='255' label={<Label style={{backgroundColor: "blue"}}/> } />
       </div>
       <div style={{ paddingBottom: '1em' }}>
         Price:
