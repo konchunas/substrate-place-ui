@@ -25,7 +25,7 @@ class PurchasePixelSegment extends React.Component {
       b: parseInt(blue)
     }))
 
-    this.color.log()
+    // this.color.log()
   }
 
   render() {

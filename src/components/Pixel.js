@@ -8,6 +8,7 @@ const Pixel = props => {
       interactive={true}
       click={() => props.onClick(props.x, props.y, props.color)}
       draw={g => {
+        g.clear()
         if (props.color)
             g.beginFill(props.color);
         
