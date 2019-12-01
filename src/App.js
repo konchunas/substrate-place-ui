@@ -5,7 +5,9 @@ import Chunk from "./components/Chunk";
 import Heading from "./components/Heading";
 import WalletSegment from "./components/Wallet";
 import PurchasePixelSegment from "./components/PurchasePixel"
-import {Pretty} from "./components/Pretty";
+import Overlay from "./components/Overlay"
+import {Pretty} from "./components/Pretty"
+
 
 
 import { Segment, Header, Rail, Label } from "semantic-ui-react";
@@ -116,6 +118,7 @@ export class App extends ReactiveComponent {
                   scaled={16}
                 >
                   {chunks}
+                  <Overlay selectionX={this.state.selectedPixel.x} selectionY={this.state.selectedPixel.y}/>
                 </Viewport>
               )}
             </AppConsumer>

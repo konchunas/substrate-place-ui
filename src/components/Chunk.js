@@ -28,15 +28,15 @@ const Chunk = props => {
 
 
   const instance = React.useRef(null);
-  let onPixelClick = (event) => {
-    let pixel = event.data.getLocalPosition(instance.current);
-    let x = Math.floor(pixel.x)
-    let y = Math.floor(pixel.y)
-    let color = pixels[x][y]
-    let chunkFirstPixel = toCartesian(props.chunkNumber, 0)
+  const onPixelClick = (event) => {
+    const pixel = event.data.getLocalPosition(instance.current);
+    const x = Math.floor(pixel.x)
+    const y = Math.floor(pixel.y)
+    const color = pixels[x][y]
+    const chunkFirstPixel = toCartesian(props.chunkNumber, 0)
+    const globalX = x + chunkFirstPixel.x
+    const globalY = y + chunkFirstPixel.y
     const htmlColor = utils.hex2string(color)
-    let globalX = x + chunkFirstPixel.x
-    let globalY = y + chunkFirstPixel.y
     props.onPixelSelected(globalX, globalY, htmlColor)
   }
 
