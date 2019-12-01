@@ -113,6 +113,7 @@ export class App extends ReactiveComponent {
                   app={app}
                   worldWidth={FIELD_SIZE}
                   worldHeight={FIELD_SIZE}
+                  scaled={16}
                 >
                   {chunks}
                 </Viewport>
