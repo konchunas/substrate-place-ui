@@ -1,33 +1,25 @@
 import React from "react";
-import { Stage, Container, AppConsumer, Graphics } from "@inlet/react-pixi";
+import { Stage, Container, AppConsumer } from "@inlet/react-pixi";
 import Viewport from "./components/Viewport";
 import Chunk from "./components/Chunk";
 import Heading from "./components/Heading";
-import { SignerBond } from './components/AccountIdBond';
 import WalletSegment from "./components/Wallet";
 import PurchasePixelSegment from "./components/PurchasePixel"
 import {Pretty} from "./components/Pretty";
 
 
 import { Segment, Header, Rail, Label } from "semantic-ui-react";
-import { Bond, TransformBond, AddCodecTransform } from "oo7";
-import { ReactiveComponent, If, Rspan } from "oo7-react";
+import { Bond } from "oo7";
+import { ReactiveComponent, If } from "oo7-react";
 import {
   calls,
   runtime,
   chain,
   system,
   runtimeUp,
-  ss58Decode,
-  ss58Encode,
-  pretty,
   addressBook,
   secretStore,
   metadata,
-  nodeService,
-  bytesToHex,
-  hexToBytes,
-  AccountId,
   addCodecTransform
 } from "oo7-substrate";
 
@@ -37,7 +29,7 @@ import "./App.css";
 import { CHUNKS_PER_SIDE, PIXELS_PER_CHUNK, FIELD_SIZE } from "./settings";
 import { cartesianToIndex, CHUNK_COORDS } from "./utils";
 
-const { createRef, useState } = React;
+const { createRef } = React;
 
 export class App extends ReactiveComponent {
   constructor() {
@@ -79,7 +71,6 @@ export class App extends ReactiveComponent {
       b: "u8"
     });
 
-    const contextRef = createRef();
   }
 
   setSelectedPixel = pixel => {

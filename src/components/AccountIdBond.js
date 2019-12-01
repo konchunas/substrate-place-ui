@@ -1,11 +1,7 @@
 const React = require('react');
-const {Bond} = require('oo7');
-const {ReactiveComponent, Rimg} = require('oo7-react');
 const Identicon = require('polkadot-identicon').default;
-const {Label, Input} = require('semantic-ui-react');
 const {InputBond} = require('./InputBond');
-const nacl = require('tweetnacl');
-const {stringToSeed, hexToBytes, bytesToHex, runtime, secretStore, addressBook, ss58Decode, AccountId} = require('oo7-substrate');
+const {runtime, secretStore, addressBook} = require('oo7-substrate');
 
 class AccountIdBond extends InputBond {
 	constructor () { super() }
@@ -21,10 +17,6 @@ class AccountIdBond extends InputBond {
 	}
 
 	render () {
-		const labelStyle = {
-			position: 'absolute',
-			zIndex: this.props.labelZIndex || 10
-		};
 		return InputBond.prototype.render.call(this);
 	}
 }
