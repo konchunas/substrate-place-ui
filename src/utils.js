@@ -28,14 +28,14 @@ export function toCartesian(chunk, index) {
 }
 
 export function indexToCartesian(index, type) {
-  let size = type == CHUNK_COORDS ? CHUNKS_PER_SIDE : PIXELS_PER_CHUNK
+  let size = type === CHUNK_COORDS ? CHUNKS_PER_SIDE : PIXELS_PER_CHUNK
   let x = index % size
   let y = Math.floor(index / size)
   return {x: x, y: y}
 }
 
 export function cartesianToIndex(x, y, type) {
-  let size = type == CHUNK_COORDS ? CHUNKS_PER_SIDE : PIXELS_PER_CHUNK
+  let size = type === CHUNK_COORDS ? CHUNKS_PER_SIDE : PIXELS_PER_CHUNK
   let localX = x % size;
   let localY = y % size;
   return localX + localY * size;

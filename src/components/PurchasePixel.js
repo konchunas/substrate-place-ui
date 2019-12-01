@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Bond } from "oo7";
-import { Segment, Header, Label, Input } from "semantic-ui-react";
+import { Segment, Header, Label } from "semantic-ui-react";
 import { runtime, calls } from 'oo7-substrate';
 
 import { TransactButton } from ".//TransactButton";

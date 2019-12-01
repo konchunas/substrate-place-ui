@@ -1,4 +1,4 @@
-import { PixiComponent, Stage } from '@inlet/react-pixi';
+import { PixiComponent } from '@inlet/react-pixi';
 import { Viewport } from 'pixi-viewport'
 
 

@@ -61,8 +61,8 @@ export class WalletList extends ReactiveComponent {
 					</List.Content>
 					<List.Content floated='right'>
 						<div>Crypto</div>
-						<div style={{fontWeight: 'bold', width: '4em', color: key.type == 'sr25519' ? '#050' : '#daa'}}>
-							{key.type == 'ed25519' ? 'Ed25519' : key.type == 'sr25519' ? 'Sr25519' : '???'}
+						<div style={{fontWeight: 'bold', width: '4em', color: key.type === 'sr25519' ? '#050' : '#daa'}}>
+							{key.type === 'ed25519' ? 'Ed25519' : key.type === 'sr25519' ? 'Sr25519' : '???'}
 						</div>
 					</List.Content>
 					<span className='ui avatar image' style={{minWidth: '36px'}}>

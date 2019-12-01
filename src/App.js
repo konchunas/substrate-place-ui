@@ -47,8 +47,8 @@ export class App extends ReactiveComponent {
     window.that = this;
     window.metadata = metadata;
 
-    this.account = new Bond
-    this.amount = new Bond;
+    this.account = new Bond()
+    this.amount = new Bond()
 
     this.state = {
       selectedPixel: {

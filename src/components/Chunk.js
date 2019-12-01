@@ -1,19 +1,19 @@
 import React from "react";
 import { utils } from "pixi.js";
 import { runtime } from "oo7-substrate"
-import { indexToCartesian, toCartesian } from "../utils"
+import { indexToCartesian, toCartesian, CHUNK_COORDS, PIXEL_COORDS  } from "../utils"
 import { PIXELS_PER_CHUNK } from "../settings"
 import { Graphics } from "@inlet/react-pixi";
+import installCommonGlobals from "jest-util/build/installCommonGlobals";
 
 const Chunk = props => {
 
   let [pixels, setPixels] = React.useState(() => createMatrix(PIXELS_PER_CHUNK))
 
   let convertToCartesianChunk = (array) => {
-    // console.log("convertToCartesianChunk", array.length)
     let newPixels = createMatrix(PIXELS_PER_CHUNK)
     for (let i = 0; i < array.length; i++) {
-      const {x, y} = indexToCartesian(i);
+      const {x, y} = indexToCartesian(i, PIXEL_COORDS);
       const color = array[i].color
       const hexColor = utils.rgb2hex([color.r / 255.0, color.g / 255.0, color.b / 255.0])
       newPixels[x][y] = hexColor

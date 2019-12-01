@@ -3,7 +3,7 @@ import React from "react";
 import { Bond } from "oo7";
 import { Segment, Header, Icon, Button } from "semantic-ui-react";
 import Identicon from 'polkadot-identicon';
-import {runtime, secretStore} from 'oo7-substrate';
+import { secretStore } from 'oo7-substrate';
 
 import { WalletList } from './WalletList';
 import { InputBond } from "./InputBond"
@@ -13,10 +13,10 @@ import { TransformBondButton } from './TransformBondButton';
 class WalletSegment extends React.Component {
   constructor() {
     super()
-    this.seed = new Bond;
+    this.seed = new Bond()
     this.seedAccount = this.seed.map(s => s ? secretStore().accountFromPhrase(s) : undefined)
     this.seedAccount.use()
-    this.name = new Bond;
+    this.name = new Bond()
   }
   render() {
     return <Segment>
