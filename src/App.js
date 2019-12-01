@@ -60,7 +60,6 @@ export class App extends ReactiveComponent {
         x: 0,
         y: 0
       },
-      chunks: []
     };
 
     addCodecTransform("Pixel<Balance>", {
@@ -72,6 +71,24 @@ export class App extends ReactiveComponent {
       g: "u8",
       b: "u8"
     });
+
+    this.chunks = []
+    for (let i = 0; i < CHUNKS_PER_SIDE; i++) {
+      for (let j = 0; j < CHUNKS_PER_SIDE; j++) {
+        const key = `${i} ${j}`;
+        const chunkNumber = cartesianToIndex(i, j, CHUNK_COORDS);
+        this.chunks.push(
+          <Chunk
+            key={key}
+            x={i * 8}
+            y={j * 8}
+            side={PIXELS_PER_CHUNK}
+            onPixelSelected={this.onPixelSelected}
+            chunkNumber={chunkNumber}
+          />
+        );
+      }
+    }
 
   }
 
@@ -87,24 +104,6 @@ export class App extends ReactiveComponent {
   };
 
   readyRender() {
-    let chunks = [];
-    for (let i = 0; i < CHUNKS_PER_SIDE; i++) {
-      for (let j = 0; j < CHUNKS_PER_SIDE; j++) {
-        const key = `${i} ${j}`;
-        const chunkNumber = cartesianToIndex(i, j, CHUNK_COORDS);
-        chunks.push(
-          <Chunk
-            key={key}
-            x={i * 8}
-            y={j * 8}
-            side={PIXELS_PER_CHUNK}
-            onPixelSelected={this.onPixelSelected}
-            chunkNumber={chunkNumber}
-          />
-        );
-      }
-    }
-
     return (
       <Segment>
         <Stage width={720} height={720} options={{ backgroundColor: 0xbbbbbb }}>
@@ -117,7 +116,7 @@ export class App extends ReactiveComponent {
                   worldHeight={FIELD_SIZE}
                   scaled={16}
                 >
-                  {chunks}
+                  {this.chunks}
                   <Overlay selectionX={this.state.selectedPixel.x} selectionY={this.state.selectedPixel.y}/>
                 </Viewport>
               )}
