@@ -32,18 +32,18 @@ class PurchasePixelSegment extends React.Component {
     return <Segment>
       <Header>Purchase pixel</Header>
       <div style={{ paddingBottom: '1em' }}>
-        Payer: <br />
+        payer<br />
         <SignerBond bond={this.account} />
       </div>
       <div style={{ paddingBottom: '1em' }}>
         color <br />
-        <InputBond bond={this.r} placeholder='255' label={<Label style={{backgroundColor: "red"}}/> } />
-        <InputBond bond={this.g} placeholder='255' label={<Label style={{backgroundColor: "green"}}/> } />
-        <InputBond bond={this.b} placeholder='255' label={<Label style={{backgroundColor: "blue"}}/> } />
+        <InputBond bond={this.r} placeholder='255' label={<Label style={{ backgroundColor: "red" }} />} />
+        <InputBond bond={this.g} placeholder='255' label={<Label style={{ backgroundColor: "green" }} />} />
+        <InputBond bond={this.b} placeholder='255' label={<Label style={{ backgroundColor: "blue" }} />} />
       </div>
       <div style={{ paddingBottom: '1em' }}>
-        Price:
-      <BalanceBond bond={this.amount} />
+        price
+        <BalanceBond bond={this.amount} />
       </div>
       <div>
         <TransactButton
