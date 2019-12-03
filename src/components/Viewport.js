@@ -14,6 +14,7 @@ export default PixiComponent('Viewport', {
           .pinch()
           .wheel()
           .moveCenter(0,0)
+          .on("drag-end", (event) => props.onDragEnd(event.viewport.getVisibleBounds()))
         //   .decelerate();
   }
 })

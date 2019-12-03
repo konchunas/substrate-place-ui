@@ -2,6 +2,7 @@ import React from "react";
 import { Stage, Container, AppConsumer } from "@inlet/react-pixi";
 import Viewport from "./components/Viewport";
 import Chunk from "./components/Chunk";
+import ChunkLoader from "./components/ChunkLoader";
 import Heading from "./components/Heading";
 import WalletSegment from "./components/Wallet";
 import PurchasePixelSegment from "./components/PurchasePixel"
@@ -31,7 +32,6 @@ import "./App.css";
 import { CHUNKS_PER_SIDE, PIXELS_PER_CHUNK, FIELD_SIZE } from "./settings";
 import { cartesianToIndex, CHUNK_COORDS } from "./utils";
 
-const { createRef } = React;
 
 export class App extends ReactiveComponent {
   constructor() {
@@ -72,6 +72,8 @@ export class App extends ReactiveComponent {
       b: "u8"
     });
 
+    this.loader = React.createRef()
+
     this.chunks = []
     for (let i = 0; i < CHUNKS_PER_SIDE; i++) {
       for (let j = 0; j < CHUNKS_PER_SIDE; j++) {
@@ -103,6 +105,10 @@ export class App extends ReactiveComponent {
     this.setSelectedPixel({ x: x, y: y, color: color });
   };
 
+  onMoveFinished = (newRect) => {
+    this.loader.current.onMoveFinished(newRect)
+  }
+
   readyRender() {
     return (
       <Segment>
@@ -115,8 +121,10 @@ export class App extends ReactiveComponent {
                   worldWidth={FIELD_SIZE}
                   worldHeight={FIELD_SIZE}
                   scaled={16}
+                  onDragEnd={(rect) => this.loader.current.onMoveFinished(rect)}
                 >
-                  {this.chunks}
+                  {/* {this.chunks} */}
+                  <ChunkLoader ref={this.loader}/>
                   <Overlay selectionX={this.state.selectedPixel.x} selectionY={this.state.selectedPixel.y}/>
                 </Viewport>
               )}
@@ -155,7 +163,7 @@ export class App extends ReactiveComponent {
   }
 }
 
-// window.addEventListener("resize", resize);
+// window.addEventListener("resize", console.log);
 
 // // Resize function window
 // function resize() {
