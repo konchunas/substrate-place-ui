@@ -9,7 +9,7 @@ import { cartesianToIndex, CHUNK_COORDS, euclidDivision } from "../utils"
 
 export class ChunkLoader extends React.Component {
 
-  state = {}
+  state = {chunks: []}
 
   getChunkComponents = (state) => {
     let components = []
@@ -35,7 +35,7 @@ export class ChunkLoader extends React.Component {
     let firstX = euclidDivision(newRect.x, PIXELS_PER_CHUNK)
     let firstY = euclidDivision(newRect.y, PIXELS_PER_CHUNK)
     let lastX = firstX + euclidDivision(newRect.width, PIXELS_PER_CHUNK)
-    let lastY = firstX + euclidDivision(newRect.width, PIXELS_PER_CHUNK)
+    let lastY = firstY + euclidDivision(newRect.height, PIXELS_PER_CHUNK)
     console.log(firstX, firstY, lastX, lastY)
     let chunks = []
     for (let i = firstX; i <= lastX; i++) {
@@ -47,14 +47,24 @@ export class ChunkLoader extends React.Component {
           })
       }
     }
-    this.setState(chunks)
+    // chunks.map(console.log)
+    this.setState({chunks: chunks})
   };
 
   render() {
     return (
       <Container>
-        {/* {Object.values(this.chunks)} */}
-        {this.getChunkComponents(this.state)}
+        {this.state.chunks.map(chunk => 
+          <Chunk
+              key={`${chunk.x}${chunk.y}`}
+              x={chunk.x}
+              y={chunk.y}
+              side={PIXELS_PER_CHUNK}
+              chunkX={chunk.x / PIXELS_PER_CHUNK}
+              chunkY={chunk.y / PIXELS_PER_CHUNK}
+              onPixelSelected={this.props.onPixelSelected}
+          />
+        )}
       </Container>
     );
   }
