@@ -17,7 +17,9 @@ export default PixiComponent('Viewport', {
           .moveCenter(0,0)
           .clampZoom({
             maxHeight: 128,
-            maxWidth: 128
+            maxWidth: 128,
+            minHeight: 16,
+            minWidth: 16
           })
           .on("drag-end", (event) => {
             props.onDragEnd(event.viewport.getVisibleBounds())
