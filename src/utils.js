@@ -40,3 +40,11 @@ export function cartesianToIndex(x, y, type) {
   let localY = y % size;
   return localX + localY * size;
 }
+
+export function euclidDivision(a, b) {
+  let result = Math.trunc(a / b)
+  if (a % b < 0) {
+      return b > 0 ? result - 1 :  result + 1
+  }
+  return result
+}

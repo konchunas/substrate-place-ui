@@ -4,7 +4,8 @@ import { runtime } from "oo7-substrate"
 import { indexToCartesian, toCartesian, CHUNK_COORDS, PIXEL_COORDS  } from "../utils"
 import { PIXELS_PER_CHUNK } from "../settings"
 import { Graphics } from "@inlet/react-pixi";
-import installCommonGlobals from "jest-util/build/installCommonGlobals";
+
+const DEBUG_DRAW = true;
 
 const Chunk = props => {
 
@@ -22,22 +23,31 @@ const Chunk = props => {
   };
   
   React.useEffect(() => {
-    let runtimePixels = runtime.place.chunks(props.chunkNumber)
+    let runtimePixels = runtime.place.chunks([props.chunkX, props.chunkY])
     runtimePixels.tie(convertToCartesianChunk)
   }, []);
 
 
   const instance = React.useRef(null);
   const onPixelClick = (event) => {
+    console.log("click")
+    console.log(event)
     const pixel = event.data.getLocalPosition(instance.current);
     const x = Math.floor(pixel.x)
     const y = Math.floor(pixel.y)
     const color = pixels[x][y]
-    const chunkFirstPixel = toCartesian(props.chunkNumber, 0)
-    const globalX = x + chunkFirstPixel.x
-    const globalY = y + chunkFirstPixel.y
+    const globalX = x + props.chunkX * PIXELS_PER_CHUNK
+    const globalY = y + props.chunkY * PIXELS_PER_CHUNK
     const htmlColor = utils.hex2string(color)
     props.onPixelSelected(globalX, globalY, htmlColor)
+  }
+
+  const onMouseDown = (event) => {
+    console.log(event)
+  }
+
+  const onMouseUp = (event) => {
+    console.log(event)
   }
 
   return (
@@ -45,22 +55,31 @@ const Chunk = props => {
       ref={instance}
       {...props}
       interactive={true}
+      // mousedown={onMouseDown}
+      // mouseup={onMouseUp}
       click={onPixelClick}
+      // mousemove=
       draw={g => {
         g.clear()
+        console.log("redrawing chunk", props.chunkNumber)
         for (let i = 0; i < PIXELS_PER_CHUNK; i++) {
           for (let j = 0; j < PIXELS_PER_CHUNK; j++) {
             let color = pixels[i][j]
-            // console.log("color ", color)
             if (color)
-              g.beginFill(color);
+              g.beginFill(color)
+            else if (DEBUG_DRAW)
+              g.beginFill(0xff00ff)
         
             g.lineStyle(0.01, 0x0)
-            g.drawRect(i, j, 1, 1);
+            g.drawRect(i, j, 1, 1)
              
             if (color)
                 g.endFill();
           }
+        }
+        if (DEBUG_DRAW) {
+          g.lineStyle(0.1, 0xff8800)
+          g.drawRect(0, 0, 8, 8)
         }
       }}
     />

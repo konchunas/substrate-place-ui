@@ -4,7 +4,7 @@ import { Container } from "@inlet/react-pixi"
 import DummyChunk from "./DummyChunk"
 
 import { CHUNKS_PER_SIDE, PIXELS_PER_CHUNK } from "../settings"
-import { cartesianToIndex, CHUNK_COORDS } from "../utils"
+import { cartesianToIndex, CHUNK_COORDS, euclidDivision } from "../utils"
 
 
 export class ChunkLoader extends React.Component {
@@ -16,13 +16,13 @@ export class ChunkLoader extends React.Component {
     for (let chunk of Object.values(state)) {
       const key = `${chunk.x}${chunk.y}`;
       components.push(
-        <DummyChunk
+        <Chunk
           key={key}
           x={chunk.x}
           y={chunk.y}
-          height={5}
-          width={5}
-          chunkNumber={`${chunk.x/8},${chunk.y/8}`}
+          side={PIXELS_PER_CHUNK}
+          chunkX={chunk.x / PIXELS_PER_CHUNK}
+          chunkY={chunk.y / PIXELS_PER_CHUNK}
         />
       )
     }
@@ -31,31 +31,19 @@ export class ChunkLoader extends React.Component {
 
   onMoveFinished = (newRect) => {
     console.log("Chunk loader on move finished")
-    let firstX = Math.floor(newRect.x / PIXELS_PER_CHUNK)
-    let firstY = Math.floor(newRect.y / PIXELS_PER_CHUNK)
-    let lastX = firstX + Math.floor(newRect.width / PIXELS_PER_CHUNK)
-    let lastY = firstX + Math.floor(newRect.width / PIXELS_PER_CHUNK)
+    let firstX = euclidDivision(newRect.x, PIXELS_PER_CHUNK)
+    let firstY = euclidDivision(newRect.y, PIXELS_PER_CHUNK)
+    let lastX = firstX + euclidDivision(newRect.width, PIXELS_PER_CHUNK)
+    let lastY = firstX + euclidDivision(newRect.width, PIXELS_PER_CHUNK)
     console.log(firstX, firstY, lastX, lastY)
     let chunks = []
     for (let i = firstX; i <= lastX; i++) {
       for (let j = firstY; j <= lastY; j++) {
-        const chunkNumber = cartesianToIndex(i, j, CHUNK_COORDS);
         chunks.push
           ({
             x: i * 8,
             y: j * 8,
-            number: chunkNumber
           })
-        // const chunkNumber = cartesianToIndex(i, j, CHUNK_COORDS);
-        // this.chunks[chunkNumber] = 
-        //   (<Chunk
-        //     key={key}
-        //     x={i * 8}
-        //     y={j * 8}
-        //     side={PIXELS_PER_CHUNK}
-        //     // onPixelSelected={this.onPixelSelected}
-        //     chunkNumber={chunkNumber}
-        //   />)
       }
     }
     this.setState(chunks)
@@ -66,11 +54,6 @@ export class ChunkLoader extends React.Component {
       <Container>
         {/* {Object.values(this.chunks)} */}
         {this.getChunkComponents(this.state)}
-        {/* <DummyChunk
-          height={8}
-          width={8}
-          chunkNumber={"heeey"}
-        /> */}
       </Container>
     );
   }

@@ -10,7 +10,6 @@ import Overlay from "./components/Overlay"
 import {Pretty} from "./components/Pretty"
 
 
-
 import { Segment, Header, Rail, Label } from "semantic-ui-react";
 import { Bond } from "oo7";
 import { ReactiveComponent, If } from "oo7-react";
@@ -73,24 +72,6 @@ export class App extends ReactiveComponent {
     });
 
     this.loader = React.createRef()
-
-    this.chunks = []
-    for (let i = 0; i < CHUNKS_PER_SIDE; i++) {
-      for (let j = 0; j < CHUNKS_PER_SIDE; j++) {
-        const key = `${i} ${j}`;
-        const chunkNumber = cartesianToIndex(i, j, CHUNK_COORDS);
-        this.chunks.push(
-          <Chunk
-            key={key}
-            x={i * 8}
-            y={j * 8}
-            side={PIXELS_PER_CHUNK}
-            onPixelSelected={this.onPixelSelected}
-            chunkNumber={chunkNumber}
-          />
-        );
-      }
-    }
 
   }
 
