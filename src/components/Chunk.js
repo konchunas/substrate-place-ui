@@ -30,8 +30,6 @@ const Chunk = props => {
 
   const instance = React.useRef(null);
   const onPixelClick = (event) => {
-    console.log("click")
-    console.log(event)
     const pixel = event.data.getLocalPosition(instance.current);
     const x = Math.floor(pixel.x)
     const y = Math.floor(pixel.y)
@@ -41,26 +39,16 @@ const Chunk = props => {
     const htmlColor = utils.hex2string(color)
     props.onPixelSelected(globalX, globalY, htmlColor)
   }
-
-  const onMouseDown = (event) => {
-    console.log(event)
-  }
-
-  const onMouseUp = (event) => {
-    console.log(event)
-  }
-
+  
   return (
     <Graphics
       ref={instance}
       {...props}
       interactive={true}
-      // mousedown={onMouseDown}
-      // mouseup={onMouseUp}
       click={onPixelClick}
-      // mousemove=
       draw={g => {
         g.clear()
+        console.log(g.scale)
         console.log("redrawing chunk", props.chunkNumber)
         for (let i = 0; i < PIXELS_PER_CHUNK; i++) {
           for (let j = 0; j < PIXELS_PER_CHUNK; j++) {

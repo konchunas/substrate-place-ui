@@ -10,11 +10,18 @@ export default PixiComponent('Viewport', {
           worldWidth: props.worldWidth,
           worldHeight: props.worldHeight,
           interaction: props.app.renderer.plugins.interaction,
+          stopPropagation: true,
         }).drag()
           .pinch()
           .wheel()
           .moveCenter(0,0)
-          .on("drag-end", (event) => props.onDragEnd(event.viewport.getVisibleBounds()))
+          .clampZoom({
+            maxHeight: 128,
+            maxWidth: 128
+          })
+          .on("drag-end", (event) => {
+            props.onDragEnd(event.viewport.getVisibleBounds())
+          })
         //   .decelerate();
   }
 })

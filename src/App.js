@@ -105,7 +105,10 @@ export class App extends ReactiveComponent {
                   onDragEnd={(rect) => this.loader.current.onMoveFinished(rect)}
                 >
                   {/* {this.chunks} */}
-                  <ChunkLoader ref={this.loader}/>
+                  <ChunkLoader
+                    ref={this.loader}
+                    onPixelSelected={this.onPixelSelected}
+                  />
                   <Overlay selectionX={this.state.selectedPixel.x} selectionY={this.state.selectedPixel.y}/>
                 </Viewport>
               )}

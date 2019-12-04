@@ -23,6 +23,7 @@ export class ChunkLoader extends React.Component {
           side={PIXELS_PER_CHUNK}
           chunkX={chunk.x / PIXELS_PER_CHUNK}
           chunkY={chunk.y / PIXELS_PER_CHUNK}
+          onPixelSelected={this.props.onPixelSelected}
         />
       )
     }
