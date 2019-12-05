@@ -4,12 +4,10 @@ import { Bond } from "oo7"
 import { If } from "oo7-react"
 import { Segment, Header, Label } from "semantic-ui-react"
 import { runtime, calls } from 'oo7-substrate'
-import { runtime, calls } from 'oo7-substrate'
+
 import { Pretty } from "./Pretty"
 import { TransactButton } from "./TransactButton"
 import { BalanceBond } from "./BalanceBond"
-import { TransactButton } from "./TransactButton"
-import { SignerBond } from './AccountIdBond'
 import { InputBond } from "./InputBond"
 import { SignerBond } from './AccountIdBond'
 
@@ -28,8 +26,6 @@ class PurchasePixelSegment extends React.Component {
       g: parseInt(green),
       b: parseInt(blue)
     }))
-
-    // this.color.log()
   }
 
   render() {
@@ -48,9 +44,24 @@ class PurchasePixelSegment extends React.Component {
       </div>
       <div style={{ paddingBottom: '1em' }}>
         color <br />
-        <InputBond bond={this.r} placeholder='255' label={<Label style={{ backgroundColor: "red" }} />} />
-        <InputBond bond={this.g} placeholder='255' label={<Label style={{ backgroundColor: "green" }} />} />
-        <InputBond bond={this.b} placeholder='255' label={<Label style={{ backgroundColor: "blue" }} />} />
+        <InputBond
+          validator={colorValidator}
+          bond={this.r} 
+          placeholder='255' 
+          label={<Label style={{ backgroundColor: "red" }} />}
+        />
+        <InputBond
+          validator={colorValidator}
+          bond={this.g}
+          placeholder='255' 
+          label={<Label style={{ backgroundColor: "green" }} />}
+        />
+        <InputBond
+          validator={colorValidator}
+          bond={this.b} 
+          placeholder='255' 
+          label={<Label style={{ backgroundColor: "blue" }} />}
+        />
       </div>
       <div style={{ paddingBottom: '1em' }}>
         price
@@ -69,6 +80,15 @@ class PurchasePixelSegment extends React.Component {
     </Segment>
 
   }
+}
+
+const colorValidator = (n) => {
+  let parsed = parseInt(n)
+  if (isNaN(parsed))
+    return null
+  else if ((parsed >= 0) && (parsed <= 255))
+    return n
+  return null
 }
 
 export default PurchasePixelSegment;
