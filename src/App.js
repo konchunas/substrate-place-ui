@@ -1,18 +1,16 @@
 import React from "react";
 import { Stage, Container, AppConsumer } from "@inlet/react-pixi";
 import Viewport from "./components/Viewport";
-import Chunk from "./components/Chunk";
 import ChunkLoader from "./components/ChunkLoader";
 import Heading from "./components/Heading";
 import WalletSegment from "./components/Wallet";
 import PurchasePixelSegment from "./components/PurchasePixel"
 import Overlay from "./components/Overlay"
-import {Pretty} from "./components/Pretty"
 
 
 import { Segment, Header, Rail, Label } from "semantic-ui-react";
 import { Bond } from "oo7";
-import { ReactiveComponent, If } from "oo7-react";
+import { ReactiveComponent } from "oo7-react";
 import {
   calls,
   runtime,
@@ -119,29 +117,18 @@ export class App extends ReactiveComponent {
           <Segment>
             <Header>Selected pixel</Header>
             <div>
-              Color: <Label style={{backgroundColor: this.state.selectedPixel.color}}/>
+              Color: <Label style={{ backgroundColor: this.state.selectedPixel.color }} />
             </div>
             <div>
               Position: ({this.state.selectedPixel.x},
               {this.state.selectedPixel.y})
             </div>
           </Segment>
-          <PurchasePixelSegment selectedPixel={this.state.selectedPixel}/>
-          <WalletSegment/>
+          <PurchasePixelSegment selectedPixel={this.state.selectedPixel} />
+          <WalletSegment />
         </Rail>
         <Heading></Heading>
-        <If condition={this.account.ready()} then={<span>
-            <Label>Balance
-                <Label.Detail>
-                  <Pretty value={runtime.balances.balance(this.account)} />
-                </Label.Detail>
-            </Label>
-            <Label>Nonce
-                <Label.Detail>
-                  {/* <Pretty value={runtime.system.accountNonce(this.source)} /> */}
-                </Label.Detail>
-            </Label>
-        </span>} />
+
       </Segment>
     );
   }

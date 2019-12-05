@@ -1,13 +1,17 @@
-import React from "react";
+import React from "react"
 
-import { Bond } from "oo7";
-import { Segment, Header, Label } from "semantic-ui-react";
-import { runtime, calls } from 'oo7-substrate';
-
-import { TransactButton } from ".//TransactButton";
-import { BalanceBond } from "./BalanceBond";
+import { Bond } from "oo7"
+import { If } from "oo7-react"
+import { Segment, Header, Label } from "semantic-ui-react"
+import { runtime, calls } from 'oo7-substrate'
+import { runtime, calls } from 'oo7-substrate'
+import { Pretty } from "./Pretty"
+import { TransactButton } from "./TransactButton"
+import { BalanceBond } from "./BalanceBond"
+import { TransactButton } from "./TransactButton"
+import { SignerBond } from './AccountIdBond'
 import { InputBond } from "./InputBond"
-import { SignerBond } from './AccountIdBond';
+import { SignerBond } from './AccountIdBond'
 
 
 class PurchasePixelSegment extends React.Component {
@@ -34,6 +38,13 @@ class PurchasePixelSegment extends React.Component {
       <div style={{ paddingBottom: '1em' }}>
         payer<br />
         <SignerBond bond={this.account} />
+        <If condition={this.account.ready()} then={<span>
+            <Label>Balance
+                <Label.Detail>
+                  <Pretty value={runtime.balances.balance(this.account)} />
+                </Label.Detail>
+            </Label>
+        </span>} />
       </div>
       <div style={{ paddingBottom: '1em' }}>
         color <br />
