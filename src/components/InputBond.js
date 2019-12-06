@@ -165,4 +165,4 @@ InputBond.defaultProps = {
 	reversible: false
 };
 
-module.exports = { InputBond };
+export { InputBond };

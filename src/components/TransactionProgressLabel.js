@@ -46,4 +46,4 @@ TransactionProgressLabel.defaultProps = {
 	total: 0
 };
 
-module.exports = { styleStatus, TransactionProgressLabel };
+export { styleStatus, TransactionProgressLabel };

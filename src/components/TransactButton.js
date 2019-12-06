@@ -127,4 +127,4 @@ class TransactButtonAux extends ReactiveComponent {
 	}
 }
 
-module.exports = { TransactButton };
+export { TransactButton };

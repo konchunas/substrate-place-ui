@@ -121,4 +121,5 @@ BalanceBond.defaultProps = {
 	}
 }
 
-module.exports = { BalanceBond }
+export { BalanceBond }
+

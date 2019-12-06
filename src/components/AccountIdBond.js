@@ -66,4 +66,4 @@ SignerBond.defaultProps = {
 	defaultValue: ''
 };
 
-module.exports = { AccountIdBond, SignerBond };
+export { AccountIdBond, SignerBond };
