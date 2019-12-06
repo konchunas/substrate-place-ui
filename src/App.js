@@ -26,8 +26,8 @@ import {
 import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 
-import { CHUNKS_PER_SIDE, PIXELS_PER_CHUNK, FIELD_SIZE } from "./settings";
-import { cartesianToIndex, CHUNK_COORDS } from "./utils";
+import { FIELD_SIZE } from "./settings";
+import { Pretty } from "./components/Pretty";
 
 
 export class App extends ReactiveComponent {
@@ -55,7 +55,8 @@ export class App extends ReactiveComponent {
           b: 129
         },
         x: 0,
-        y: 0
+        y: 0,
+        price: 0
       },
     };
 
@@ -79,9 +80,9 @@ export class App extends ReactiveComponent {
     });
   };
 
-  onPixelSelected = (x, y, color) => {
+  onPixelSelected = (x, y, color, price) => {
     // this.calls.place.purchasePixel(this.account)
-    this.setSelectedPixel({ x: x, y: y, color: color });
+    this.setSelectedPixel({ x: x, y: y, color: color, price: price });
   };
 
   onMoveFinished = (newRect) => {
@@ -117,11 +118,22 @@ export class App extends ReactiveComponent {
           <Segment>
             <Header>Selected pixel</Header>
             <div>
-              Color: <Label style={{ backgroundColor: this.state.selectedPixel.color }} />
+              <Label>Color:</Label> 
+              <Label style={{ backgroundColor: this.state.selectedPixel.color }} />
             </div>
             <div>
-              Position: ({this.state.selectedPixel.x},
-              {this.state.selectedPixel.y})
+              <Label>Position: 
+                <Label.Detail>
+                  {this.state.selectedPixel.x}, {this.state.selectedPixel.y}
+                </Label.Detail>
+              </Label>
+            </div>
+            <div>
+              <Label>Price
+                <Label.Detail>
+                  <Pretty value={this.state.selectedPixel.price}/>
+                </Label.Detail>
+              </Label>
             </div>
           </Segment>
           <PurchasePixelSegment selectedPixel={this.state.selectedPixel} />

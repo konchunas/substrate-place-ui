@@ -10,19 +10,23 @@ const DEBUG_DRAW = true;
 const Chunk = React.memo(props => {
 
   let [pixels, setPixels] = React.useState([])
+  let [prices, setPrices] = React.useState([])
 
   let convertToCartesianChunk = (array) => {
     if (array.length <= 0) {
       return
     }
     let newPixels = createMatrix(PIXELS_PER_CHUNK)
+    let newPrices = createMatrix(PIXELS_PER_CHUNK)
     for (let i = 0; i < array.length; i++) {
       const {x, y} = indexToCartesian(i, PIXEL_COORDS);
       const color = array[i].color
       const hexColor = utils.rgb2hex([color.r / 255.0, color.g / 255.0, color.b / 255.0])
       newPixels[x][y] = hexColor
+      newPrices[x][y] = array[i].price
     }
     setPixels(newPixels)
+    setPrices(newPrices)
   };
   
   React.useEffect(() => {
@@ -39,7 +43,8 @@ const Chunk = React.memo(props => {
     const globalX = x + props.chunkX * PIXELS_PER_CHUNK
     const globalY = y + props.chunkY * PIXELS_PER_CHUNK
     const htmlColor = pixels.length > 0 ? utils.hex2string(pixels[x][y]) : "white"
-    props.onPixelSelected(globalX, globalY, htmlColor)
+    const price = prices.length > 0 ? prices[x][y] : 0
+    props.onPixelSelected(globalX, globalY, htmlColor, price)
   }
 
   return (
