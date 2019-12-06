@@ -6,11 +6,13 @@ import { Segment, Header, Label } from "semantic-ui-react"
 import { runtime, calls } from 'oo7-substrate'
 
 import { Pretty } from "./Pretty"
+import { Color } from "./Color"
 import { TransactButton } from "./TransactButton"
 import { BalanceBond } from "./BalanceBond"
 import { InputBond } from "./InputBond"
 import { SignerBond } from './AccountIdBond'
 
+import { utils } from "pixi.js";
 
 class PurchasePixelSegment extends React.Component {
   constructor() {
@@ -26,6 +28,11 @@ class PurchasePixelSegment extends React.Component {
       g: parseInt(green),
       b: parseInt(blue)
     }))
+    this.htmlColor = this.color.map(colors => {
+      return utils.hex2string(utils.rgb2hex([colors.r/255.0, colors.g/255.0, colors.b/255.0]))
+    })
+    window.htmlColor = this.htmlColor
+
   }
 
   render() {
@@ -35,33 +42,36 @@ class PurchasePixelSegment extends React.Component {
         payer<br />
         <SignerBond bond={this.account} />
         <If condition={this.account.ready()} then={<span>
-            <Label>Balance
-                <Label.Detail>
-                  <Pretty value={runtime.balances.balance(this.account)} />
-                </Label.Detail>
-            </Label>
+          <Label>Balance
+            <Label.Detail>
+              <Pretty value={runtime.balances.balance(this.account)} />
+            </Label.Detail>
+          </Label>
         </span>} />
       </div>
       <div style={{ paddingBottom: '1em' }}>
         color <br />
         <InputBond
           validator={colorValidator}
-          bond={this.r} 
-          placeholder='255' 
+          bond={this.r}
+          placeholder='255'
           label={<Label style={{ backgroundColor: "red" }} />}
         />
         <InputBond
           validator={colorValidator}
           bond={this.g}
-          placeholder='255' 
+          placeholder='255'
           label={<Label style={{ backgroundColor: "green" }} />}
         />
         <InputBond
           validator={colorValidator}
-          bond={this.b} 
-          placeholder='255' 
+          bond={this.b}
+          placeholder='255'
           label={<Label style={{ backgroundColor: "blue" }} />}
         />
+        <div>
+          result: <Color value={this.htmlColor} />
+        </div>
       </div>
       <div style={{ paddingBottom: '1em' }}>
         price
