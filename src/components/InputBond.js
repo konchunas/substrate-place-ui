@@ -155,7 +155,9 @@ class InputBond extends ReactiveComponent {
 			label={this.makeLabel ? this.makeLabel() : this.props.label}
 			labelPosition={this.makeLabel ? this.makeLabel(true) : this.props.labelPosition}
 			icon={icon}
-			iconPosition={iconPosition}
+      iconPosition={iconPosition}
+      data-tooltip={this.props.tooltip}
+      data-position="bottom center"
 		/>);
 	}
 }
