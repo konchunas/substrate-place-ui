@@ -91,8 +91,8 @@ export class App extends ReactiveComponent {
 
   readyRender() {
     return (
-      <Segment>
-        <Stage width={720} height={720} options={{ backgroundColor: 0xbbbbbb }}>
+      <div >
+        <Stage width={window.innerWidth} height={window.innerHeight} options={{ backgroundColor: 0xbbbbbb }}>
           <Container sortableChildren={true}>
             <AppConsumer>
               {app => (
@@ -114,22 +114,22 @@ export class App extends ReactiveComponent {
             </AppConsumer>
           </Container>
         </Stage>
-        <Rail attached internal position="right">
+        <Rail size='mini' style={{width: '350px'}} attached internal position="right">
           <Segment>
             <Header>Selected pixel</Header>
             <div>
-              <Label>Color:</Label> 
+              <Label>Color</Label> 
               <Label style={{ backgroundColor: this.state.selectedPixel.color }} />
             </div>
             <div>
-              <Label>Position: 
+              <Label>Position
                 <Label.Detail>
                   {this.state.selectedPixel.x}, {this.state.selectedPixel.y}
                 </Label.Detail>
               </Label>
             </div>
             <div>
-              <Label>Price
+              <Label data-tooltip="Previous price paid for selected pixel" data-position="bottom center">Price
                 <Label.Detail>
                   <Pretty value={this.state.selectedPixel.price}/>
                 </Label.Detail>
@@ -139,9 +139,11 @@ export class App extends ReactiveComponent {
           <PurchasePixelSegment selectedPixel={this.state.selectedPixel} />
           <WalletSegment />
         </Rail>
+        <div>
         <Heading></Heading>
+        </div>
 
-      </Segment>
+      </div>
     );
   }
 }

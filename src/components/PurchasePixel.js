@@ -55,30 +55,41 @@ class PurchasePixelSegment extends React.Component {
           validator={colorValidator}
           bond={this.r}
           placeholder='255'
+          style={{ width: '5em', marginRight: '2em'}}
+          tooltip={"Color component from 0 to 255"}
           label={<Label style={{ backgroundColor: "red" }} />}
         />
         <InputBond
           validator={colorValidator}
           bond={this.g}
           placeholder='255'
+          style={{ width: '5em', marginRight: '2em'}}
+          tooltip={"Color component from 0 to 255"}
           label={<Label style={{ backgroundColor: "green" }} />}
         />
         <InputBond
           validator={colorValidator}
           bond={this.b}
           placeholder='255'
+          style={{ width: '5em', marginRight: '2em'}}
+          tooltip={"Color component from 0 to 255"}
           label={<Label style={{ backgroundColor: "blue" }} />}
         />
-        <div>
-          result: <Color value={this.htmlColor} />
+        <div data-tooltip="Resulting color to be placed" data-position="bottom center">
+          <Label>Result</Label>
+          <Color value={this.htmlColor} />
         </div>
       </div>
       <div style={{ paddingBottom: '1em' }}>
-        price
-        <BalanceBond bond={this.amount} />
+        price <br />
+        <BalanceBond 
+          bond={this.amount}
+          tooltip={"Should be greater than previous price"}
+        />
       </div>
       <div>
         <TransactButton
+          tooltip={"Buy this pixel with specified price"}
           content="Purchase"
           icon='warning'
           tx={{
