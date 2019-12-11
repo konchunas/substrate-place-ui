@@ -4,11 +4,12 @@ import Viewport from "./components/Viewport";
 import ChunkLoader from "./components/ChunkLoader";
 import Heading from "./components/Heading";
 import WalletSegment from "./components/Wallet";
+import SelectedPixelSegment from "./components/SelectedPixel";
 import PurchasePixelSegment from "./components/PurchasePixel"
 import Overlay from "./components/Overlay"
 
 
-import { Segment, Header, Rail, Label } from "semantic-ui-react";
+import { Segment, Header, Rail, Input, Button} from "semantic-ui-react";
 import { Bond } from "oo7";
 import { ReactiveComponent } from "oo7-react";
 import {
@@ -43,6 +44,9 @@ export class App extends ReactiveComponent {
     window.system = system;
     window.that = this;
     window.metadata = metadata;
+
+    // hide scrollbar
+    document.body.style.overflow = 'hidden';
 
     this.account = new Bond()
     this.amount = new Bond()
@@ -117,27 +121,17 @@ export class App extends ReactiveComponent {
             </AppConsumer>
           </Container>
         </Stage>
-        <Rail size='mini' style={{width: '350px'}} attached internal position="right">
+        <Rail style={{width: '350px'}} attached internal position="right">
+          <SelectedPixelSegment selectedPixel={this.state.selectedPixel} />
           <Segment>
-            <Header>Selected pixel</Header>
-            <div>
-              <Label>Color</Label> 
-              <Label style={{ backgroundColor: this.state.selectedPixel.color }} />
-            </div>
-            <div>
-              <Label>Position
-                <Label.Detail>
-                  {this.state.selectedPixel.x}, {this.state.selectedPixel.y}
-                </Label.Detail>
-              </Label>
-            </div>
-            <div>
-              <Label data-tooltip="Previous price paid for selected pixel" data-position="bottom center">Price
-                <Label.Detail>
-                  <Pretty value={this.state.selectedPixel.price}/>
-                </Label.Detail>
-              </Label>
-            </div>
+            <Header>Quickly navigate</Header>
+            <Input
+              style={{ width: '7em', marginRight: '1em'}}
+              placeholder='X' />
+            <Input 
+              style={{ width: '7em', marginRight: '1em'}}
+              placeholder='Y' />
+            <Button onClick={this.navigate}>Go</Button>
           </Segment>
           <PurchasePixelSegment selectedPixel={this.state.selectedPixel} />
           <WalletSegment />
