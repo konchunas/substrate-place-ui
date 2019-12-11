@@ -91,7 +91,10 @@ export class App extends ReactiveComponent {
 
   readyRender() {
     return (
-      <div >
+      <div>
+        <div style={{position: "fixed" }}>
+          <Heading></Heading>
+        </div>
         <Stage width={window.innerWidth} height={window.innerHeight} options={{ backgroundColor: 0xbbbbbb }}>
           <Container sortableChildren={true}>
             <AppConsumer>
@@ -139,10 +142,6 @@ export class App extends ReactiveComponent {
           <PurchasePixelSegment selectedPixel={this.state.selectedPixel} />
           <WalletSegment />
         </Rail>
-        <div>
-        <Heading></Heading>
-        </div>
-
       </div>
     );
   }
