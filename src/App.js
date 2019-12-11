@@ -6,6 +6,7 @@ import Heading from "./components/Heading";
 import WalletSegment from "./components/Wallet";
 import SelectedPixelSegment from "./components/SelectedPixel";
 import PurchasePixelSegment from "./components/PurchasePixel"
+import QuickNavSegment from "./components/QuickNav"
 import Overlay from "./components/Overlay"
 
 
@@ -75,7 +76,7 @@ export class App extends ReactiveComponent {
     });
 
     this.loader = React.createRef()
-
+    this.viewport = React.createRef()
   }
 
   setSelectedPixel = pixel => {
@@ -89,8 +90,9 @@ export class App extends ReactiveComponent {
     this.setSelectedPixel({ x: x, y: y, color: color, price: price });
   };
 
-  onMoveFinished = (newRect) => {
-    this.loader.current.onMoveFinished(newRect)
+
+  quicklyNavigate = (x,y) => {
+    this.viewport.current.moveCenter(x,y)
   }
 
   readyRender() {
@@ -105,9 +107,7 @@ export class App extends ReactiveComponent {
               {app => (
                 <Viewport
                   app={app}
-                  worldWidth={FIELD_SIZE}
-                  worldHeight={FIELD_SIZE}
-                  scaled={16}
+                    ref={this.viewport}
                   onDragEnd={(rect) => this.loader.current.onMoveFinished(rect)}
                 >
                   {/* {this.chunks} */}
@@ -122,17 +122,8 @@ export class App extends ReactiveComponent {
           </Container>
         </Stage>
         <Rail style={{width: '350px'}} attached internal position="right">
-          <SelectedPixelSegment selectedPixel={this.state.selectedPixel} />
-          <Segment>
-            <Header>Quickly navigate</Header>
-            <Input
-              style={{ width: '7em', marginRight: '1em'}}
-              placeholder='X' />
-            <Input 
-              style={{ width: '7em', marginRight: '1em'}}
-              placeholder='Y' />
-            <Button onClick={this.navigate}>Go</Button>
-          </Segment>
+          <SelectedPixelSegment pixel={this.state.selectedPixel} />
+          <QuickNavSegment onNavigate={this.quicklyNavigate}/>
           <PurchasePixelSegment selectedPixel={this.state.selectedPixel} />
           <WalletSegment />
         </Rail>
