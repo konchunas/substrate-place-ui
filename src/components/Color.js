@@ -8,9 +8,9 @@ export class Color extends ReactiveComponent {
 	}
 	render () {
 		if (this.ready() || this.props.default == null) {
-			return (<Label className={this.state.className} name={this.props.name} style={{ backgroundColor: this.state.value }} />)
+			return (<Label className={this.state.className} name={this.props.name} style={{ backgroundColor: this.state.value, border: "2px solid lightgray" }} />)
 		} else {
-      return <Label style={{ backgroundColor: this.props.default }} />
+      return <Label style={{ backgroundColor: this.props.default, border: "2px solid lightgray" }} /> 
 		}
 	}
 }

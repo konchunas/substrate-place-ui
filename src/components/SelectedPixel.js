@@ -9,12 +9,12 @@ const SelectedPixelSegment = props => {
       <Header>Selected pixel</Header>
       <div>
         <Label>Color</Label>
-        <Label style={{ backgroundColor: props.color }} />
+        <Label style={{ backgroundColor: props.pixel.color, border: "2px solid lightgray" }} />
       </div>
       <div>
         <Label>Position
           <Label.Detail>
-            {props.x}, {props.y}
+            {props.pixel.x}, {props.pixel.y}
           </Label.Detail>
         </Label>
       </div>
@@ -22,7 +22,7 @@ const SelectedPixelSegment = props => {
         <Label
          data-tooltip="Previous price paid for selected pixel" data-position="bottom center">Price
            <Label.Detail>
-            <Pretty value={props.price} />
+            <Pretty value={props.pixel.price} />
           </Label.Detail>
         </Label>
       </div>
