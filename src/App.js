@@ -63,6 +63,8 @@ export class App extends ReactiveComponent {
         y: 0,
         price: 0
       },
+      scale: 1,
+      visibleRect: {}
     };
 
     addCodecTransform("Pixel<Balance>", {
@@ -75,7 +77,6 @@ export class App extends ReactiveComponent {
       b: "u8"
     });
 
-    this.loader = React.createRef()
     this.viewport = React.createRef()
   }
 
@@ -86,10 +87,15 @@ export class App extends ReactiveComponent {
   };
 
   onPixelSelected = (x, y, color, price) => {
-    // this.calls.place.purchasePixel(this.account)
     this.setSelectedPixel({ x: x, y: y, color: color, price: price });
   };
 
+  onViewportChanged = (visibleRect, scale) => {
+    this.setState({
+      scale: scale,
+      visibleRect: visibleRect
+    })
+  }
 
   quicklyNavigate = (x,y) => {
     this.viewport.current.moveCenter(x,y)
@@ -101,26 +107,29 @@ export class App extends ReactiveComponent {
         <div style={{position: "fixed" }}>
           <Heading></Heading>
         </div>
-        <Stage width={window.innerWidth} height={window.innerHeight} options={{ backgroundColor: 0xbbbbbb }}>
-          <Container sortableChildren={true}>
-            <AppConsumer>
-              {app => (
-                <Viewport
-                  app={app}
+          <Stage width={window.innerWidth} height={window.innerHeight} options={{ backgroundColor: 0xbbbbbb }}>
+            <Container sortableChildren={true}>
+              <AppConsumer>
+                {app => (
+                  <Viewport
+                    app={app}
                     ref={this.viewport}
-                  onDragEnd={(rect) => this.loader.current.onMoveFinished(rect)}
-                >
-                  {/* {this.chunks} */}
-                  <ChunkLoader
-                    ref={this.loader}
-                    onPixelSelected={this.onPixelSelected}
-                  />
-                  <Overlay selectionX={this.state.selectedPixel.x} selectionY={this.state.selectedPixel.y}/>
-                </Viewport>
-              )}
-            </AppConsumer>
-          </Container>
-        </Stage>
+                    viewportChanged={this.onViewportChanged}
+                  >
+                    <ChunkLoader
+                      onPixelSelected={this.onPixelSelected}
+                      visibleRect={this.state.visibleRect}
+                    />
+                    <Overlay
+                      scaling={this.state.scale}
+                      selectionX={this.state.selectedPixel.x}
+                      selectionY={this.state.selectedPixel.y}
+                    />
+                  </Viewport>
+                )}
+              </AppConsumer>
+            </Container>
+          </Stage>
         <Rail style={{width: '350px'}} attached internal position="right">
           <SelectedPixelSegment pixel={this.state.selectedPixel} />
           <QuickNavSegment onNavigate={this.quicklyNavigate}/>
