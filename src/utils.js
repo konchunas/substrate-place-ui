@@ -48,3 +48,7 @@ export function euclidDivision(a, b) {
   }
   return result
 }
+
+export function clamp(min, number, max) {
+  return Math.min(Math.max(number, min), max);
+};

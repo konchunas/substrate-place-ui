@@ -10,11 +10,11 @@ const QuickNavSegment = props => {
     <Segment>
       <Header>Quickly navigate</Header>
       <Input
-        style={{ width: '7em', marginRight: '1em'}}
+        style={{ width: '8em', marginRight: '1em'}}
         placeholder='X' 
         onChange={event => setX(event.target.value)} />
       <Input 
-        style={{ width: '7em', marginRight: '1em'}}
+        style={{ width: '8em', marginRight: '1em'}}
         placeholder='Y'
         onChange={event => setY(event.target.value)} />
       <Button onClick={event => props.onNavigate(x,y)}>Go</Button>
