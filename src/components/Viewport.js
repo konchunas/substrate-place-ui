@@ -2,6 +2,13 @@ import { PixiComponent } from '@inlet/react-pixi';
 import { Viewport } from 'pixi-viewport'
 
 
+// HACK extend viewport with method emitting custom event for when user inputs coordinates manually
+Viewport.prototype.moveAndUpdate = function(x,y)  {
+  this.moveCenter(x,y)
+  this.emit("click-moved", {viewport: this})
+  return this
+};
+
 export default PixiComponent('Viewport', {
   create: props => {
     let lastTimer = null
@@ -18,13 +25,13 @@ export default PixiComponent('Viewport', {
       }, 350);
     }
 
+    let moveEventHandler = event => proposeViewportChange(event.viewport)
+
     return new Viewport({
       screenWidth: props.app.renderer.width,
       screenHeight: props.app.renderer.height,
-      worldWidth: props.worldWidth,
-      worldHeight: props.worldHeight,
       interaction: props.app.renderer.plugins.interaction,
-      stopPropagation: true,
+      stopPropagation: true
     }).drag()
       .pinch()
       .wheel()
@@ -34,18 +41,11 @@ export default PixiComponent('Viewport', {
         minHeight: 16,
         minWidth: 16
       })
-      .on("drag-end", (event) => {
-        proposeViewportChange(event.viewport)
-      })
-      .on("move-end", (event) => {
-        proposeViewportChange(event.viewport)
-      })
-      .on("zoomed", (event) => {
-        proposeViewportChange(event.viewport)
-      })
-      .moveCenter(0, 0)
+      .on("drag-end", moveEventHandler)
+      .on("move-end", moveEventHandler)
+      .on("zoomed", moveEventHandler)
+      .on("click-moved", moveEventHandler)
+      .moveAndUpdate(0,0)
     //   .decelerate();
   },
-
-  
 })

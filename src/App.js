@@ -98,7 +98,7 @@ export class App extends ReactiveComponent {
   }
 
   quicklyNavigate = (x,y) => {
-    this.viewport.current.moveCenter(x,y)
+    this.viewport.current.moveAndUpdate(x,y)
   }
 
   readyRender() {
@@ -107,7 +107,10 @@ export class App extends ReactiveComponent {
         <div style={{position: "fixed" }}>
           <Heading></Heading>
         </div>
-          <Stage width={window.innerWidth} height={window.innerHeight} options={{ backgroundColor: 0xbbbbbb }}>
+          <Stage
+            width={window.innerWidth}
+            height={window.innerHeight}
+            options={{ backgroundColor: 0xbbbbbb }}>
             <Container sortableChildren={true}>
               <AppConsumer>
                 {app => (
