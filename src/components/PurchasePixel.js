@@ -41,6 +41,15 @@ class PurchasePixelSegment extends React.Component {
       <div style={{ paddingBottom: '1em' }}>
         payer<br />
         <SignerBond bond={this.account} />
+        <TransactButton
+          tooltip={"Add a bit of funds to your account"}
+          content="Use faucet"
+          icon='warning'
+          tx={{
+            sender: runtime.indices.tryIndex(this.account),
+            call: calls.place.useFaucet(),
+          }}
+        />
         <If condition={this.account.ready()} then={<span>
           <Label>Balance
             <Label.Detail>
