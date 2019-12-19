@@ -40,7 +40,7 @@ class PurchasePixelSegment extends React.Component {
       <Header>Purchase pixel</Header>
       <div style={{ paddingBottom: '1em' }}>
         payer<br />
-        <SignerBond bond={this.account} />
+        <SignerBond style={{ width: '12em', marginRight: '1em'}}  bond={this.account} />
         <TransactButton
           tooltip={"Add a bit of funds to your account"}
           content="Use faucet"
