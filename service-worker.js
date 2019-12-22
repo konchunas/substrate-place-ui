@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/substrate-place-ui/precache-manifest.c87db28cf5f6f10399200c82c0385dc1.js"
+  "/substrate-place-ui/precache-manifest.a24cc6d9e2482c2f1186db4589607aea.js"
 );
 
 self.addEventListener('message', (event) => {

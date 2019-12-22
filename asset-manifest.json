@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/substrate-place-ui/static/css/main.6aa14448.chunk.css",
-    "main.js": "/substrate-place-ui/static/js/main.17d90f2f.chunk.js",
-    "main.js.map": "/substrate-place-ui/static/js/main.17d90f2f.chunk.js.map",
+    "main.js": "/substrate-place-ui/static/js/main.76be1ec4.chunk.js",
+    "main.js.map": "/substrate-place-ui/static/js/main.76be1ec4.chunk.js.map",
     "runtime-main.js": "/substrate-place-ui/static/js/runtime-main.96d29059.js",
     "runtime-main.js.map": "/substrate-place-ui/static/js/runtime-main.96d29059.js.map",
     "static/css/2.05d07609.chunk.css": "/substrate-place-ui/static/css/2.05d07609.chunk.css",
     "static/js/2.035310fa.chunk.js": "/substrate-place-ui/static/js/2.035310fa.chunk.js",
     "static/js/2.035310fa.chunk.js.map": "/substrate-place-ui/static/js/2.035310fa.chunk.js.map",
     "index.html": "/substrate-place-ui/index.html",
-    "precache-manifest.c87db28cf5f6f10399200c82c0385dc1.js": "/substrate-place-ui/precache-manifest.c87db28cf5f6f10399200c82c0385dc1.js",
+    "precache-manifest.a24cc6d9e2482c2f1186db4589607aea.js": "/substrate-place-ui/precache-manifest.a24cc6d9e2482c2f1186db4589607aea.js",
     "service-worker.js": "/substrate-place-ui/service-worker.js",
     "static/css/2.05d07609.chunk.css.map": "/substrate-place-ui/static/css/2.05d07609.chunk.css.map",
     "static/css/main.6aa14448.chunk.css.map": "/substrate-place-ui/static/css/main.6aa14448.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.05d07609.chunk.css",
     "static/js/2.035310fa.chunk.js",
     "static/css/main.6aa14448.chunk.css",
-    "static/js/main.17d90f2f.chunk.js"
+    "static/js/main.76be1ec4.chunk.js"
   ]
 }

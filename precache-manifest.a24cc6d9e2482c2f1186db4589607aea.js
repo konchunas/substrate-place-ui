@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5a595deeb5f33ca01fd8d4501c3c92b2",
+    "revision": "2d515833849dfdcb67861ba176a1e861",
     "url": "/substrate-place-ui/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/substrate-place-ui/static/css/2.05d07609.chunk.css"
   },
   {
-    "revision": "5a4d4fab20ba5a2d22de",
+    "revision": "ba55c94e4c1e0bb3c08b",
     "url": "/substrate-place-ui/static/css/main.6aa14448.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/substrate-place-ui/static/js/2.035310fa.chunk.js"
   },
   {
-    "revision": "5a4d4fab20ba5a2d22de",
-    "url": "/substrate-place-ui/static/js/main.17d90f2f.chunk.js"
+    "revision": "ba55c94e4c1e0bb3c08b",
+    "url": "/substrate-place-ui/static/js/main.76be1ec4.chunk.js"
   },
   {
     "revision": "b894f2a9daebec3549fe",
