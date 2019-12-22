@@ -55,13 +55,6 @@ const Chunk = React.memo(props => {
       click={onPixelClick}
       draw={g => {
         g.clear()
-        if (DEBUG_DRAW) {
-          g.lineStyle(1, 0xff8800)
-        }
-        g.beginFill(0xbbbbbb)
-        g.drawRect(0, 0, 8, 8)
-        g.endFill()
-        g.lineStyle(1 / 16, 0x0)
         if (pixels.length > 0) {
           for (let i = 0; i < PIXELS_PER_CHUNK; i++) {
             for (let j = 0; j < PIXELS_PER_CHUNK; j++) {
@@ -71,8 +64,12 @@ const Chunk = React.memo(props => {
               g.endFill();
             }
           }
+        } else {
+          g.beginFill(0xbbbbbb)
+          g.lineStyle(1 / 4.0, 0x0)
+          g.drawRect(0, 0, 8, 8)
+          g.endFill()
         }
-
       }}
     />
   );

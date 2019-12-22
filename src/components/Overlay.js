@@ -8,7 +8,7 @@ const Overlay = props => {
       {...props}
       draw={g => {
         g.clear()
-        g.lineStyle(0.4, 0xffcc00)
+        g.lineStyle(1 / 4, 0xffcc00)
         g.drawRect(props.selectionX, props.selectionY, 1, 1);
       }}  
     />
