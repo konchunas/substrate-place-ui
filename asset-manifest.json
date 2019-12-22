@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.6aa14448.chunk.css",
-    "main.js": "/static/js/main.f324e3d0.chunk.js",
-    "main.js.map": "/static/js/main.f324e3d0.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.fff9eaa5.js",
-    "runtime-main.js.map": "/static/js/runtime-main.fff9eaa5.js.map",
-    "static/css/2.bc4837a2.chunk.css": "/static/css/2.bc4837a2.chunk.css",
-    "static/js/2.ac2534e8.chunk.js": "/static/js/2.ac2534e8.chunk.js",
-    "static/js/2.ac2534e8.chunk.js.map": "/static/js/2.ac2534e8.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.cdfe0cb09b246034b0ed766f843b4357.js": "/precache-manifest.cdfe0cb09b246034b0ed766f843b4357.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.bc4837a2.chunk.css.map": "/static/css/2.bc4837a2.chunk.css.map",
-    "static/css/main.6aa14448.chunk.css.map": "/static/css/main.6aa14448.chunk.css.map",
-    "static/media/semantic.min.css": "/static/media/outline-icons.ef60a4f6.woff"
+    "main.css": "/substrate-place-ui/static/css/main.6aa14448.chunk.css",
+    "main.js": "/substrate-place-ui/static/js/main.17d90f2f.chunk.js",
+    "main.js.map": "/substrate-place-ui/static/js/main.17d90f2f.chunk.js.map",
+    "runtime-main.js": "/substrate-place-ui/static/js/runtime-main.96d29059.js",
+    "runtime-main.js.map": "/substrate-place-ui/static/js/runtime-main.96d29059.js.map",
+    "static/css/2.05d07609.chunk.css": "/substrate-place-ui/static/css/2.05d07609.chunk.css",
+    "static/js/2.035310fa.chunk.js": "/substrate-place-ui/static/js/2.035310fa.chunk.js",
+    "static/js/2.035310fa.chunk.js.map": "/substrate-place-ui/static/js/2.035310fa.chunk.js.map",
+    "index.html": "/substrate-place-ui/index.html",
+    "precache-manifest.c87db28cf5f6f10399200c82c0385dc1.js": "/substrate-place-ui/precache-manifest.c87db28cf5f6f10399200c82c0385dc1.js",
+    "service-worker.js": "/substrate-place-ui/service-worker.js",
+    "static/css/2.05d07609.chunk.css.map": "/substrate-place-ui/static/css/2.05d07609.chunk.css.map",
+    "static/css/main.6aa14448.chunk.css.map": "/substrate-place-ui/static/css/main.6aa14448.chunk.css.map",
+    "static/media/semantic.min.css": "/substrate-place-ui/static/media/outline-icons.ef60a4f6.woff"
   },
   "entrypoints": [
-    "static/js/runtime-main.fff9eaa5.js",
-    "static/css/2.bc4837a2.chunk.css",
-    "static/js/2.ac2534e8.chunk.js",
+    "static/js/runtime-main.96d29059.js",
+    "static/css/2.05d07609.chunk.css",
+    "static/js/2.035310fa.chunk.js",
     "static/css/main.6aa14448.chunk.css",
-    "static/js/main.f324e3d0.chunk.js"
+    "static/js/main.17d90f2f.chunk.js"
   ]
 }
