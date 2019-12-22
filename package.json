@@ -2,7 +2,7 @@
   "name": "substrate-place-ui",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://konchunas.github.io/substrate-place-ui",
+  "homepage": "",
   "dependencies": {
     "@inlet/react-pixi": "^1.1.8",
     "gh-pages": "^2.1.1",
