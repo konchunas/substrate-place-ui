@@ -43,7 +43,7 @@ const Chunk = React.memo(props => {
     const globalX = x + props.chunkX * PIXELS_PER_CHUNK
     const globalY = y + props.chunkY * PIXELS_PER_CHUNK
     const htmlColor = pixels.length > 0 ? utils.hex2string(pixels[x][y]) : "white"
-    const price = prices.length > 0 ? prices[x][y] : 0
+    const price = (prices.length > 0) ? prices[x][y] : "1 unit"
     props.onPixelSelected(globalX, globalY, htmlColor, price)
   }
 

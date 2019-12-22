@@ -22,15 +22,14 @@ import {
   addressBook,
   secretStore,
   metadata,
-  addCodecTransform
+  addCodecTransform,
+  setNodeUri
 } from "oo7-substrate";
 
 import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 
-import { FIELD_SIZE } from "./settings";
-import { Pretty } from "./components/Pretty";
-
+setNodeUri(['ws://167.172.45.141:9944'])
 
 export class App extends ReactiveComponent {
   constructor() {
@@ -61,7 +60,7 @@ export class App extends ReactiveComponent {
         },
         x: 0,
         y: 0,
-        price: 0
+        price: "1 unit"
       },
       scale: 1,
       visibleRect: {}
@@ -143,13 +142,5 @@ export class App extends ReactiveComponent {
     );
   }
 }
-
-// window.addEventListener("resize", console.log);
-
-// // Resize function window
-// function resize() {
-//   const parent = App.view.parentNode;
-//   App.renderer.resize(parent.clientWidth, parent.clientHeight);
-// }
 
 export default App;
