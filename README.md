@@ -4,7 +4,7 @@ This project is a user interface for [Substrate Place](https://github.com/konchu
 
 It is a web page connecting to the node and retrieving pixel board from blockchain. As user scrolls the map it automatically fetches new chunks of pixels and plots them on the screen. It has functionality for navigating and purchasing the pixel as well as basic wallet functionality. As of now faucet is already included into interface so you can jumpstart and try this application online right now by following the link.
 
-To see it in action using my node go to https://konchunas.github.io/substrate-place-ui
+To see it in action using my node go to http://konchunas.com:5000/
 
 ## Development
 
