@@ -25,7 +25,7 @@ export class ChunkLoader extends React.Component {
     let chunks = []
     for (let i = firstX; i <= lastX; i++) {
       for (let j = firstY; j <= lastY; j++) {
-        const key = `${i}${j}`;
+        const key = `${i} ${j}`;
         chunks.push(
           <Chunk
             key={key}
